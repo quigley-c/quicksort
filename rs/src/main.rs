@@ -27,7 +27,7 @@ fn main() {
         end_range = args[3].parse::<usize>().unwrap();
     } else {
         start_range = 0;
-        end_range = len;
+        end_range = len-1;
     }
     if start_range > end_range || end_range >= len {
         println!("invalid range.");
