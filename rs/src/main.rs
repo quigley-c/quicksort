@@ -1,3 +1,5 @@
+// Carson Quigley -- CS 575 Algo
+
 use std::env;
 use std::fs;
 use rand::prelude::*;
@@ -37,6 +39,7 @@ fn main() {
 
     let result = quicksort(&mut num_list, 0, len-1 as usize);
 
+	// good lord this took way too much time
     let mut print_len = end_range - start_range;
     if start_range == 0 { print_len = print_len + 1; }
     println!("len: {}\nrange: {} - {}", print_len, start_range, end_range);
@@ -51,6 +54,7 @@ fn partition(a: &mut Vec<i32>, lo: usize, hi: usize) -> usize {
     let mut i = lo as isize;
     let mut j = hi as isize;
 
+	// two pointers, I hope this is obvious as-is
     loop {
         while j > pivot as isize {
             if a[j as usize] < a[pivot] {
