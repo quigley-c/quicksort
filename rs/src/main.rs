@@ -5,6 +5,7 @@ use std::fs;
 use rand::prelude::*;
 
 fn main() {
+	// I'm a type wizard. I cast all day every day.
     let args: Vec<String> = env::args().collect();
 
     if args.len() != 2 && args.len() != 4{
@@ -87,6 +88,7 @@ fn partition(a: &mut Vec<i32>, lo: usize, hi: usize) -> usize {
 fn quicksort(mut a: &mut Vec<i32>, lo: usize, hi: usize) -> &mut Vec<i32> {
     if hi <= lo { return a; }
 
+	// should recurse log N times
     let pivot = partition(a, lo, hi);
     a = quicksort(a, lo, pivot);
     a = quicksort(a, pivot+1, hi);
