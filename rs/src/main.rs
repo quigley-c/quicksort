@@ -90,8 +90,7 @@ fn partition(a: &mut Vec<i32>, lo: usize, hi: usize) -> usize {
         a[j as usize] = tmp;
     }
 
-    let result = pivot as usize;
-    return result;
+    return pivot as usize;
 }
 
 fn quicksort(mut a: &mut Vec<i32>, lo: usize, hi: usize) -> &mut Vec<i32> {
