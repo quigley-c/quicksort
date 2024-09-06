@@ -5,7 +5,7 @@ use std::fs;
 use rand::prelude::*;
 
 fn main() {
-	// I'm a type wizard. I cast all day every day.
+    // I'm a type wizard. I cast all day every day.
     let args: Vec<String> = env::args().collect();
 
     if args.len() != 2 && args.len() != 4{
@@ -23,6 +23,7 @@ fn main() {
     let len = num_list.len();
 
     // sanity
+    // range is kept for output later
     let start_range;
     let end_range;
     if args.len() == 4 {
@@ -40,9 +41,11 @@ fn main() {
 
     let result = quicksort(&mut num_list, 0, len-1 as usize);
 
-	// good lord this took way too much time
+    // good lord this took way too much time to write
+    // print_len = corrected range representing num nums in range
     let mut print_len = end_range - start_range;
     if start_range == 0 { print_len = print_len + 1; }
+
     println!("len: {}\nrange: {} - {}", print_len, start_range, end_range);
     for num in start_range..end_range+1 {
         println!("{}", result[num]);
@@ -50,12 +53,14 @@ fn main() {
 }
 
 fn partition(a: &mut Vec<i32>, lo: usize, hi: usize) -> usize {
+    // saves precious cycles
     if lo == hi { return lo; }
+
     let mut pivot = rand::thread_rng().gen_range(lo..hi);
     let mut i = lo as isize;
     let mut j = hi as isize;
 
-	// two pointers, I hope this is obvious as-is
+    // two pointers, move towards pivot
     loop {
         while j > pivot as isize {
             if a[j as usize] < a[pivot] {
@@ -69,7 +74,11 @@ fn partition(a: &mut Vec<i32>, lo: usize, hi: usize) -> usize {
             }
             i = i+1;
         }
+
+        // should only pass when i == pivot and j == pivot
         if i >= j { break; }
+
+        // update pivot position when swapping
         if i as usize == pivot {
             pivot = j as usize;
         }
@@ -86,9 +95,9 @@ fn partition(a: &mut Vec<i32>, lo: usize, hi: usize) -> usize {
 }
 
 fn quicksort(mut a: &mut Vec<i32>, lo: usize, hi: usize) -> &mut Vec<i32> {
+    // should recurse log N times
     if hi <= lo { return a; }
 
-	// should recurse log N times
     let pivot = partition(a, lo, hi);
     a = quicksort(a, lo, pivot);
     a = quicksort(a, pivot+1, hi);
